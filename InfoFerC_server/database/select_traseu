@@ -1,0 +1,14 @@
+select id_tren, tip_tren, statie_plecare, statie_sosire, ifnull(intarzieri,0),
+ora_plecare, nume_statie, durata, distanta
+from traseuri t left join trenuri tr on t.id_traseu = tr.traseu 
+where 
+t.id_traseu in 
+	(select t1.id_traseu from traseuri t1 join traseuri t2 on t1.id_traseu = t2.id_traseu 
+	where t1.nume_statie like 'Iasi'
+	and t2.nume_statie like 'Pascani'
+	and t1.id_statie < t2.id_statie 
+	and t.id_statie < t2.id_statie + 1
+	and t.id_statie > t1.id_statie - 1) 
+and ora_plecare >= 0 and ora_plecare <= 86400
+order by tr.id_tren
+

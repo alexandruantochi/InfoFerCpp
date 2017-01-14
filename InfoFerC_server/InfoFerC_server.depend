@@ -1,0 +1,83 @@
+# depslib dependency file v1.0
+1484248859 source:/home/alex/Desktop/InfoFerC/InfoFerC_server/database/sqlite3.c
+	<vxWorks.h>
+	<pthread.h>
+	"mingw.h"
+	"_mingw.h"
+	<stdarg.h>
+	"config.h"
+	<stdint.h>
+	<inttypes.h>
+	<intrin.h>
+	<cmnintrin.h>
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	<assert.h>
+	<stddef.h>
+	<TargetConditionals.h>
+	<ctype.h>
+	<time.h>
+	<sys/sysctl.h>
+	<malloc/malloc.h>
+	<libkern/OSAtomic.h>
+	<malloc.h>
+	<pthread.h>
+	"windows.h"
+	<sys/cygwin.h>
+	<errno.h>
+	<process.h>
+	<math.h>
+	<sys/types.h>
+	<sys/stat.h>
+	<fcntl.h>
+	<unistd.h>
+	<sys/time.h>
+	<errno.h>
+	<sys/mman.h>
+	<sys/ioctl.h>
+	<sys/file.h>
+	<sys/param.h>
+	<semaphore.h>
+	<limits.h>
+	<sys/mount.h>
+	<utime.h>
+	<sys/dcmd_blk.h>
+	<sys/statvfs.h>
+	<dlfcn.h>
+	"sqlite_tcl.h"
+	"tcl.h"
+	"sqlite3rtree.h"
+	<unicode/utypes.h>
+	<unicode/uregex.h>
+	<unicode/ustring.h>
+	<unicode/ucol.h>
+	<unicode/ubrk.h>
+	<unicode/utf16.h>
+	<ctype.h>
+	<math.h>
+
+1484430927 source:/home/alex/Desktop/InfoFerC/InfoFerC_server/main.cpp
+	<iostream>
+	<sqlite3.h>
+	<string>
+	<stdio.h>
+	<SQLStatement.h>
+
+1484248859 /home/alex/Desktop/InfoFerC/InfoFerC_server/database/sqlite3.h
+	<stdarg.h>
+
+1484429139 source:/home/alex/Desktop/InfoFerC/InfoFerC_server/src/SQLStatement.cpp
+	"SQLStatement.h"
+	<string>
+	<iostream>
+
+1484430140 /home/alex/Desktop/InfoFerC/InfoFerC_server/include/SQLStatement.h
+	<string>
+
+1484429584 source:/home/alex/Desktop/InfoFerC/InfoFerC_server/src/SQLInterface.cpp
+	"SQLInterface.h"
+	<iostream>
+
+1484429534 /home/alex/Desktop/InfoFerC/InfoFerC_server/include/SQLInterface.h
+

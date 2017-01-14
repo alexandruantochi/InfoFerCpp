@@ -31,6 +31,7 @@
 		<Compiler>
 			<Add option="-Wall" />
 			<Add option="-fexceptions" />
+			<Add directory="database" />
 		</Compiler>
 		<Unit filename="main.cpp" />
 		<Extensions>
