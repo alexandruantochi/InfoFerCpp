@@ -1,5 +1,5 @@
 #include "SQLgetTrains.h"
-#include <SQLStatement.h>
+
 
 SQLgetTrains::SQLgetTrains(SQLStatement *statement)
 {
@@ -9,4 +9,5 @@ SQLgetTrains::SQLgetTrains(SQLStatement *statement)
 void SQLgetTrains::execute()
 {
     statement->getTrains();
+    std::cout<<"Executing getTrains on cliend_id: " << statement->client_id << std::endl;
 }

@@ -1,5 +1,5 @@
 #include "SQLInterface.h"
-#include <iostream>
+
 
 SQLInterface::SQLInterface()
 {

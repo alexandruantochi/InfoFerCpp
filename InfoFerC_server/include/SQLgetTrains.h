@@ -1,6 +1,7 @@
 #ifndef SQLGETTRAINS_H
 #define SQLGETTRAINS_H
 #include <SQLStatement.h>
+#include <iostream>
 
 class SQLgetTrains
 {

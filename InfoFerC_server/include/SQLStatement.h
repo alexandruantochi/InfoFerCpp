@@ -1,6 +1,8 @@
 #ifndef SQLSTATEMENT_H
 #define SQLSTATEMENT_H
 #include <string>
+#include <iostream>
+
 
 class SQLStatement
 {

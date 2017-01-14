@@ -1,6 +1,6 @@
 #include "SQLStatement.h"
 #include <string>
-#include <iostream>
+
 
 
 SQLStatement::SQLStatement() {} ;
