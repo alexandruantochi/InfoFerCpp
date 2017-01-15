@@ -48,31 +48,32 @@ void SQLStatement::prepare_class()
 
 void SQLStatement::getTrains()
 {
-    query = "select id_tren, tip_tren, statie_plecare, statie_sosire, ifnull(intarzieri,0),"
-" ora_plecare, nume_statie, durata, distanta"
-" from traseuri t left join trenuri tr on t.id_traseu = tr.traseu"
-" where"
-" t.id_traseu in"
-	" (select t1.id_traseu from traseuri t1 join traseuri t2 on t1.id_traseu = t2.id_traseu"
-	" where t1.nume_statie like '%'"
-	" and t2.nume_statie like '%'"
-	" and t1.id_statie < t2.id_statie+1"
-	" and t.id_statie < t2.id_statie + 1"
-	" and t.id_statie > t1.id_statie - 1)"
-" and ora_plecare >= 0 and ora_plecare <= 86400"
-" order by tr.id_tren;";
-    dbengineTest();
+
+    query = "select id_tren, tip_tren, statie_plecare, statie_sosire, intarzieri,"
+            " ora_plecare, nume_statie, durata, distanta"
+            " from traseuri t left join trenuri tr on t.id_traseu = tr.traseu"
+            " where t.id_traseu in"
+            " (select t1.id_traseu from traseuri t1 join traseuri t2 on t1.id_traseu = t2.id_traseu"
+            " where t1.nume_statie ='"+this->dep_station+"'"
+            " and t2.nume_statie ='"+this->arr_station+"'"
+            " and t1.id_statie < t2.id_statie+1"
+            " and t.id_statie < t2.id_statie + 1"
+            " and t.id_statie > t1.id_statie - 1"
+            " and ora_plecare >="+this->dep_time+" and ora_plecare <=" + this->arr_time + ")"
+            " order by tr.id_tren;";
+
+    executeQuery(query, this->client_id);
 }
 
 
 void SQLStatement::postDelay()
 {
     query = "Select * from trenuri";
-    dbengineTest();
+
 }
 
 void SQLStatement::postOntim()
 {
     query = "select * from trenuri";
-    dbengineTest();
+
 }

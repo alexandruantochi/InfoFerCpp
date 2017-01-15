@@ -3,7 +3,10 @@
 #include <iostream>
 #include <sqlite3.h>
 
+void DBEngineInit(const char *location);
 
-void dbengineTest();
+void executeQuery(std::string query, int client_id);
+
+int queryResolver(void *client_id, int argc, char **argv, char **azColName);
 
 #endif // DBENGINE_H_INCLUDED

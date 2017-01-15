@@ -10,22 +10,19 @@
 #include <iostream>
 #include <pthread.h>
 
-
-extern void dbengineTest();
+extern void DBEngineInit(char* dbLocation);
 
 int main()
 {
-
     const std::string dbLocation = "database/infofercpp.sqlite";
+    DBEngineInit(dbLocation.c_str());
 
 
-
-    SQLStatement stmt1("iasi","pascani","10","12","0",0,false);
-    SQLStatement stmt2("letcani","suceava","15","13","1",1,false);
-    SQLStatement stmt3("podul iloaiei","piatra neamt","09","15","1",3, true);
+    SQLStatement stmt1("Iasi","Pascani","10","85000","0",0,false);
+    SQLStatement stmt2("Letcani","Suceava","15","85000","1",1,false);
+    SQLStatement stmt3("podul iloaiei","piatra neamt","09","85000","1",3, true);
 
     SQLQueue sqlQueue;
-
 
 
 
