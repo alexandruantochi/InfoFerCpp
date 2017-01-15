@@ -9,7 +9,6 @@ class SQLgetTrains: public SQLInterface
     public:
         SQLgetTrains(SQLStatement *statement);
         void execute();
-
     protected:
 
     private:

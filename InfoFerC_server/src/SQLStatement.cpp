@@ -23,6 +23,7 @@ SQLStatement::SQLStatement(std::string dep_station,
     this->arr_time=arr_time;
     this->delay=delay;
     this->client_id=client_id;
+    this->hasPriority=hasPriority;
     prepare_class();
 }
 

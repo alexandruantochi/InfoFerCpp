@@ -6,6 +6,7 @@
 #include <SQLgetTrains.h>
 #include <SQLInterface.h>
 #include <SQLpostDelay.h>
+#include <SQLQueue.h>
 #include <list>
 #include<iostream>
 
@@ -13,28 +14,23 @@
 int main()
 {
 
-    SQLStatement stmt1("iasi","pascani","10","12","0",0);
-    SQLStatement stmt2("letcani","suceava","15","13","1",1);
+    SQLStatement stmt1("iasi","pascani","10","12","0",0,false);
+    SQLStatement stmt2("letcani","suceava","15","13","1",1,false);
+    SQLStatement stmt3("pascani","suceava","20","22","0",2, true);
+    SQLStatement stmt4("podul iloaiei","piatra neamt","09","15","1",3, true);
 
-    SQLgetTrains get1(&stmt1);
-    SQLgetTrains get2(&stmt2);
-    SQLpostDelay post1(&stmt1);
-    SQLpostDelay post2(&stmt2);
+    SQLQueue sqlQueue;
 
-    get1.execute();
-    get2.execute();
-    post1.execute();
-    post2.execute();
+    std::cout << &stmt1 << std::endl;
+    std::cout << &stmt2 << std::endl;
+    std::cout << &stmt3 << std::endl;
+    std::cout << &stmt4 << std::endl;
 
-    std::list<SQLInterface*> stmt_list;
+    sqlQueue.addQuery(new SQLgetTrains(&stmt1));
+    sqlQueue.addQuery(new SQLgetTrains(&stmt2));
+    sqlQueue.addQuery(new SQLpostDelay(&stmt3));
 
-    stmt_list.push_back(&get1);
-    stmt_list.push_back(&get2);
-
-    for (std::list<SQLInterface*>::iterator it=stmt_list.begin(); it!=stmt_list.end(); ++it)
-    {
-        (*it)->execute();
-    }
+    sqlQueue.startQuery();
 
     sqlite3 *db;
 

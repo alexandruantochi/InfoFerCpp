@@ -13,6 +13,7 @@ protected:
 
 private:
     SQLStatement* statement;
+
 };
 
 #endif // SQLPOSTDELAY_H

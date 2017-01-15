@@ -10,7 +10,6 @@ class SQLpostOntim: public SQLInterface
     public:
         SQLpostOntim(SQLStatement* statement);
         void execute();
-
     protected:
 
     private:

@@ -57,8 +57,7 @@
 	<ctype.h>
 	<math.h>
 
-1484437433 source:/home/alex/Desktop/InfoFerC/InfoFerC_server/main.cpp
-	<iostream>
+1484484375 source:/home/alex/Desktop/InfoFerC/InfoFerC_server/main.cpp
 	<sqlite3.h>
 	<string>
 	<stdio.h>
@@ -66,46 +65,57 @@
 	<SQLgetTrains.h>
 	<SQLInterface.h>
 	<SQLpostDelay.h>
+	<SQLQueue.h>
 	<list>
+	<iostream>
 
 1484248859 /home/alex/Desktop/InfoFerC/InfoFerC_server/database/sqlite3.h
 	<stdarg.h>
 
-1484434420 source:/home/alex/Desktop/InfoFerC/InfoFerC_server/src/SQLStatement.cpp
+1484484588 source:/home/alex/Desktop/InfoFerC/InfoFerC_server/src/SQLStatement.cpp
 	"SQLStatement.h"
 	<string>
 
-1484433395 /home/alex/Desktop/InfoFerC/InfoFerC_server/include/SQLStatement.h
+1484484296 /home/alex/Desktop/InfoFerC/InfoFerC_server/include/SQLStatement.h
 	<string>
 	<iostream>
 
-1484433417 source:/home/alex/Desktop/InfoFerC/InfoFerC_server/src/SQLInterface.cpp
+1484484102 source:/home/alex/Desktop/InfoFerC/InfoFerC_server/src/SQLInterface.cpp
 	"SQLInterface.h"
 
-1484435778 /home/alex/Desktop/InfoFerC/InfoFerC_server/include/SQLInterface.h
+1484484095 /home/alex/Desktop/InfoFerC/InfoFerC_server/include/SQLInterface.h
 	<iostream>
 
-1484433423 source:/home/alex/Desktop/InfoFerC/InfoFerC_server/src/SQLgetTrains.cpp
+1484484038 source:/home/alex/Desktop/InfoFerC/InfoFerC_server/src/SQLgetTrains.cpp
 	"SQLgetTrains.h"
 
-1484434850 /home/alex/Desktop/InfoFerC/InfoFerC_server/include/SQLgetTrains.h
+1484483765 /home/alex/Desktop/InfoFerC/InfoFerC_server/include/SQLgetTrains.h
 	<SQLStatement.h>
 	<SQLInterface.h>
 	<iostream>
 
-1484437489 source:/home/alex/Desktop/InfoFerC/InfoFerC_server/src/SQLpostDelay.cpp
+1484483888 source:/home/alex/Desktop/InfoFerC/InfoFerC_server/src/SQLpostDelay.cpp
 	"SQLpostDelay.h"
 
-1484434879 /home/alex/Desktop/InfoFerC/InfoFerC_server/include/SQLpostDelay.h
+1484483829 /home/alex/Desktop/InfoFerC/InfoFerC_server/include/SQLpostDelay.h
 	<SQLStatement.h>
 	<SQLInterface.h>
 	<iostream>
 
-1484433409 source:/home/alex/Desktop/InfoFerC/InfoFerC_server/src/SQLpostOntim.cpp
+1484483891 source:/home/alex/Desktop/InfoFerC/InfoFerC_server/src/SQLpostOntim.cpp
 	"SQLpostOntim.h"
 
-1484434886 /home/alex/Desktop/InfoFerC/InfoFerC_server/include/SQLpostOntim.h
+1484483870 /home/alex/Desktop/InfoFerC/InfoFerC_server/include/SQLpostOntim.h
 	<SQLStatement.h>
 	<SQLInterface.h>
 	<iostream>
+
+1484473119 source:/home/alex/Desktop/InfoFerC/InfoFerC_server/src/SQLQueue.cpp
+	"SQLQueue.h"
+	<list>
+
+1484472386 /home/alex/Desktop/InfoFerC/InfoFerC_server/include/SQLQueue.h
+	<iostream>
+	<SQLInterface.h>
+	<list>
 

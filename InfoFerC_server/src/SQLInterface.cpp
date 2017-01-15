@@ -3,6 +3,7 @@
 
 SQLInterface::SQLInterface()
 {
-std::cout << "SQLInterface init" << std::endl;
+hasPriority=false;
+std::cout << "SQLInterface init." << std::endl;
 }
 
