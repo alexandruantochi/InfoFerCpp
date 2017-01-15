@@ -1,9 +1,10 @@
 #ifndef SQLPOSTDELAY_H
 #define SQLPOSTDELAY_H
 #include <SQLStatement.h>
+#include <SQLInterface.h>
 #include <iostream>
 
-class SQLpostDelay
+class SQLpostDelay: public SQLInterface
 {
 public:
     SQLpostDelay(SQLStatement* statement);

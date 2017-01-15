@@ -1,9 +1,10 @@
 #ifndef SQLGETTRAINS_H
 #define SQLGETTRAINS_H
 #include <SQLStatement.h>
+#include <SQLInterface.h>
 #include <iostream>
 
-class SQLgetTrains
+class SQLgetTrains: public SQLInterface
 {
     public:
         SQLgetTrains(SQLStatement *statement);

@@ -3,7 +3,11 @@
 
 
 
-SQLStatement::SQLStatement() {} ;
+SQLStatement::SQLStatement()
+{
+
+    prepare_class();
+} ;
 
 
 

@@ -4,14 +4,15 @@
 
 class SQLInterface
 {
-    public:
+public:
+    virtual void execute()=0;
+
+protected:
+    SQLInterface();
 
 
-    protected:
-        virtual void execute()=0;
+private:
 
-    private:
-        SQLInterface();
 };
 
 #endif // SQLINTERFACE_H

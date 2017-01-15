@@ -1,10 +1,11 @@
 #ifndef SQLPOSTONTIM_H
 #define SQLPOSTONTIM_H
 #include <SQLStatement.h>
+#include <SQLInterface.h>
 #include <iostream>
 
 
-class SQLpostOntim
+class SQLpostOntim: public SQLInterface
 {
     public:
         SQLpostOntim(SQLStatement* statement);
