@@ -2,10 +2,8 @@
 #include <string>
 
 
-
 SQLStatement::SQLStatement()
 {
-
     prepare_class();
 } ;
 
@@ -15,7 +13,7 @@ SQLStatement::SQLStatement(std::string dep_station,
                            std::string arr_station,
                            std::string dep_time,
                            std::string arr_time,
-                           std::string delay, int client_id, bool hasPriority)
+                           std::string delay, int client_id, bool hasPriority, DBHandler* dbHandler)
 {
     this->dep_station=dep_station;
     this->arr_station=arr_station;
@@ -24,6 +22,7 @@ SQLStatement::SQLStatement(std::string dep_station,
     this->delay=delay;
     this->client_id=client_id;
     this->hasPriority=hasPriority;
+    this->dbHandler = dbHandler;
     prepare_class();
 }
 
@@ -43,23 +42,38 @@ void SQLStatement::prepare_class()
     }
     if (delay.empty())
     {
-        delay="0";
+        //second day
+        delay="86460";
     }
 }
 
 void SQLStatement::getTrains()
 {
-    std::cout<< "Get trains "<< client_id << std::endl;
-    std::cout<< arr_station + " " + dep_station + " " + dep_time + " " + arr_time + " " + delay + "\n";
+    query = "select id_tren, tip_tren, statie_plecare, statie_sosire, ifnull(intarzieri,0),"
+"ora_plecare, nume_statie, durata, distanta"
+"from traseuri t left join trenuri tr on t.id_traseu = tr.traseu"
+"where"
+"t.id_traseu in"
+	"(select t1.id_traseu from traseuri t1 join traseuri t2 on t1.id_traseu = t2.id_traseu"
+	"where t1.nume_statie like '%'"
+	"and t2.nume_statie like '%'"
+	"and t1.id_statie < t2.id_statie+"
+	"and t.id_statie < t2.id_statie + 1"
+	"and t.id_statie > t1.id_statie - 1)"
+"and ora_plecare >= 0 and ora_plecare <= 86400"
+"order by tr.id_tren";
+    dbHandler->executeQuery(query);
 }
 
 
 void SQLStatement::postDelay()
 {
-    std::cout<<"Post delay " << client_id << std::endl;
+    query = "Select delay from trenuri";
+    dbHandler->executeQuery(query);
 }
 
 void SQLStatement::postOntim()
 {
-    std::cout<<"Post on time " <<client_id << std::endl;
+    query = "Insert ceva to delay;";
+    dbHandler->executeQuery(query);
 }

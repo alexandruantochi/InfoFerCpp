@@ -2,7 +2,7 @@
 #define SQLSTATEMENT_H
 #include <string>
 #include <iostream>
-
+#include <DBHandler.h>
 
 class SQLStatement
 {
@@ -14,7 +14,7 @@ public:
                  std::string arr_station,
                  std::string dep_time,
                  std::string arr_time,
-                 std::string delay, int client_id, bool hasPriority=false);
+                 std::string delay, int client_id, bool hasPriority, DBHandler* dbHandler);
 
     void getTrains();
     void postDelay();
@@ -30,6 +30,8 @@ private:
     std::string arr_time;
     std::string delay;
     void prepare_class();
+    std::string query;
+    DBHandler* dbHandler;
 
 };
 
