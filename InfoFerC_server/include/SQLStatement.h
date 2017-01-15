@@ -14,7 +14,7 @@ public:
                  std::string arr_station,
                  std::string dep_time,
                  std::string arr_time,
-                 std::string delay, int client_id, bool hasPriority, DBHandler* dbHandler);
+                 std::string delay, int client_id, bool hasPriority);
 
     void getTrains();
     void postDelay();
@@ -31,7 +31,6 @@ private:
     std::string delay;
     void prepare_class();
     std::string query;
-    DBHandler* dbHandler;
 
 };
 
