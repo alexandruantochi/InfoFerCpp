@@ -9,7 +9,7 @@ class SQLStatement
 public:
     int client_id;
     bool hasPriority;
-    SQLStatement();
+    SQLStatement(std::string delay);
     SQLStatement(std::string dep_station,
                  std::string arr_station,
                  std::string dep_time,

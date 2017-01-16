@@ -2,8 +2,9 @@
 #include <string>
 #include "DBEngine.h"
 
-SQLStatement::SQLStatement()
+SQLStatement::SQLStatement(std::string delay)
 {
+    this->delay=delay;
     prepare_class();
 } ;
 

@@ -11,5 +11,4 @@ SQLgetTrains::SQLgetTrains(SQLStatement *statement)
 void SQLgetTrains::execute()
 {
     statement->getTrains();
-    std::cout<<"Executing getTrains on cliend_id: " << id << std::endl;
 }

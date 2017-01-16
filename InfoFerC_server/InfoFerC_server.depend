@@ -57,7 +57,7 @@
 	<ctype.h>
 	<math.h>
 
-1484588594 source:/home/alex/Desktop/InfoFerC/InfoFerC_server/main.cpp
+1484605299 source:/home/alex/Desktop/InfoFerC/InfoFerC_server/main.cpp
 	<string>
 	<stdio.h>
 	<SQLStatement.h>
@@ -66,6 +66,7 @@
 	<SQLpostDelay.h>
 	<SQLQueue.h>
 	<DBEngine.h>
+	<fileHandler.h>
 	<list>
 	<iostream>
 	<pthread.h>
@@ -73,12 +74,12 @@
 1484248859 /home/alex/Desktop/InfoFerC/InfoFerC_server/database/sqlite3.h
 	<stdarg.h>
 
-1484580564 source:/home/alex/Desktop/InfoFerC/InfoFerC_server/src/SQLStatement.cpp
+1484605003 source:/home/alex/Desktop/InfoFerC/InfoFerC_server/src/SQLStatement.cpp
 	"SQLStatement.h"
 	<string>
 	"DBEngine.h"
 
-1484513766 /home/alex/Desktop/InfoFerC/InfoFerC_server/include/SQLStatement.h
+1484605023 /home/alex/Desktop/InfoFerC/InfoFerC_server/include/SQLStatement.h
 	<string>
 	<iostream>
 	<DBHandler.h>
@@ -89,7 +90,7 @@
 1484484095 /home/alex/Desktop/InfoFerC/InfoFerC_server/include/SQLInterface.h
 	<iostream>
 
-1484484038 source:/home/alex/Desktop/InfoFerC/InfoFerC_server/src/SQLgetTrains.cpp
+1484593206 source:/home/alex/Desktop/InfoFerC/InfoFerC_server/src/SQLgetTrains.cpp
 	"SQLgetTrains.h"
 
 1484483765 /home/alex/Desktop/InfoFerC/InfoFerC_server/include/SQLgetTrains.h
@@ -97,7 +98,7 @@
 	<SQLInterface.h>
 	<iostream>
 
-1484483888 source:/home/alex/Desktop/InfoFerC/InfoFerC_server/src/SQLpostDelay.cpp
+1484593201 source:/home/alex/Desktop/InfoFerC/InfoFerC_server/src/SQLpostDelay.cpp
 	"SQLpostDelay.h"
 
 1484483829 /home/alex/Desktop/InfoFerC/InfoFerC_server/include/SQLpostDelay.h
@@ -113,7 +114,7 @@
 	<SQLInterface.h>
 	<iostream>
 
-1484473119 source:/home/alex/Desktop/InfoFerC/InfoFerC_server/src/SQLQueue.cpp
+1484593155 source:/home/alex/Desktop/InfoFerC/InfoFerC_server/src/SQLQueue.cpp
 	"SQLQueue.h"
 	<list>
 
@@ -126,12 +127,26 @@
 
 1484513487 source:/home/alex/Desktop/InfoFerC/InfoFerC_server/src/DBHandler.cpp
 
-1484587167 /home/alex/Desktop/InfoFerC/InfoFerC_server/include/DBEngine.h
+1484605325 /home/alex/Desktop/InfoFerC/InfoFerC_server/include/DBEngine.h
 	<iostream>
+	<string>
 	<sqlite3.h>
 	<map>
 	<vector>
+	<ctime>
 
-1484588650 source:/home/alex/Desktop/InfoFerC/InfoFerC_server/src/DBEngine.cpp
+1484604900 source:/home/alex/Desktop/InfoFerC/InfoFerC_server/src/DBEngine.cpp
 	"DBEngine.h"
+
+1484594318 source:/home/alex/Desktop/InfoFerC/InfoFerC_server/include/fileHandler.cpp
+
+1484595851 source:/home/alex/Desktop/InfoFerC/InfoFerC_server/src/fileHandler.cpp
+	"fileHandler.h"
+
+1484595818 /home/alex/Desktop/InfoFerC/InfoFerC_server/include/fileHandler.h
+	<iostream>
+	<map>
+	<string>
+	<fstream>
+	<vector>
 
