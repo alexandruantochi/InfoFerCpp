@@ -2,6 +2,8 @@
 #define DBENGINE_H_INCLUDED
 #include <iostream>
 #include <sqlite3.h>
+#include <map>
+#include <vector>
 
 void DBEngineInit(const char *location);
 

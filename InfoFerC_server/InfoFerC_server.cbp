@@ -30,10 +30,32 @@
 		</Build>
 		<Compiler>
 			<Add option="-Wall" />
+			<Add option="-std=c++11" />
 			<Add option="-fexceptions" />
 			<Add directory="database" />
+			<Add directory="src" />
+			<Add directory="include" />
 		</Compiler>
+		<Linker>
+			<Add library="../../../../../usr/local/lib/libsqlite3.so" />
+		</Linker>
+		<Unit filename="include/DBEngine.h" />
+		<Unit filename="include/DBHandler.h" />
+		<Unit filename="include/SQLInterface.h" />
+		<Unit filename="include/SQLQueue.h" />
+		<Unit filename="include/SQLStatement.h" />
+		<Unit filename="include/SQLgetTrains.h" />
+		<Unit filename="include/SQLpostDelay.h" />
+		<Unit filename="include/SQLpostOntim.h" />
 		<Unit filename="main.cpp" />
+		<Unit filename="src/DBEngine.cpp" />
+		<Unit filename="src/DBHandler.cpp" />
+		<Unit filename="src/SQLInterface.cpp" />
+		<Unit filename="src/SQLQueue.cpp" />
+		<Unit filename="src/SQLStatement.cpp" />
+		<Unit filename="src/SQLgetTrains.cpp" />
+		<Unit filename="src/SQLpostDelay.cpp" />
+		<Unit filename="src/SQLpostOntim.cpp" />
 		<Extensions>
 			<code_completion />
 			<debugger />

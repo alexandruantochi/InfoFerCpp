@@ -68,7 +68,7 @@ void SQLStatement::getTrains()
 
 void SQLStatement::postDelay()
 {
-    query = "Select * from trenuri";
+    query = "Select * from trenuri where id_tren=5684";
 
 }
 

@@ -57,7 +57,7 @@
 	<ctype.h>
 	<math.h>
 
-1484520268 source:/home/alex/Desktop/InfoFerC/InfoFerC_server/main.cpp
+1484588594 source:/home/alex/Desktop/InfoFerC/InfoFerC_server/main.cpp
 	<string>
 	<stdio.h>
 	<SQLStatement.h>
@@ -73,7 +73,7 @@
 1484248859 /home/alex/Desktop/InfoFerC/InfoFerC_server/database/sqlite3.h
 	<stdarg.h>
 
-1484520296 source:/home/alex/Desktop/InfoFerC/InfoFerC_server/src/SQLStatement.cpp
+1484580564 source:/home/alex/Desktop/InfoFerC/InfoFerC_server/src/SQLStatement.cpp
 	"SQLStatement.h"
 	<string>
 	"DBEngine.h"
@@ -126,10 +126,12 @@
 
 1484513487 source:/home/alex/Desktop/InfoFerC/InfoFerC_server/src/DBHandler.cpp
 
-1484519759 /home/alex/Desktop/InfoFerC/InfoFerC_server/include/DBEngine.h
+1484587167 /home/alex/Desktop/InfoFerC/InfoFerC_server/include/DBEngine.h
 	<iostream>
 	<sqlite3.h>
+	<map>
+	<vector>
 
-1484519747 source:/home/alex/Desktop/InfoFerC/InfoFerC_server/src/DBEngine.cpp
+1484588650 source:/home/alex/Desktop/InfoFerC/InfoFerC_server/src/DBEngine.cpp
 	"DBEngine.h"
 
