@@ -57,16 +57,19 @@
 	<ctype.h>
 	<math.h>
 
-1484605299 source:/home/alex/Desktop/InfoFerC/InfoFerC_server/main.cpp
+1484691474 source:/home/alex/Desktop/InfoFerC/InfoFerC_server/main.cpp
 	<string>
 	<stdio.h>
 	<SQLStatement.h>
 	<SQLgetTrains.h>
 	<SQLInterface.h>
 	<SQLpostDelay.h>
+	<SQLpostOntim.h>
 	<SQLQueue.h>
 	<DBEngine.h>
 	<fileHandler.h>
+	<loginChecker.h>
+	<clientAgent.h>
 	<list>
 	<iostream>
 	<pthread.h>
@@ -74,12 +77,12 @@
 1484248859 /home/alex/Desktop/InfoFerC/InfoFerC_server/database/sqlite3.h
 	<stdarg.h>
 
-1484605003 source:/home/alex/Desktop/InfoFerC/InfoFerC_server/src/SQLStatement.cpp
+1484690579 source:/home/alex/Desktop/InfoFerC/InfoFerC_server/src/SQLStatement.cpp
 	"SQLStatement.h"
 	<string>
 	"DBEngine.h"
 
-1484605023 /home/alex/Desktop/InfoFerC/InfoFerC_server/include/SQLStatement.h
+1484676551 /home/alex/Desktop/InfoFerC/InfoFerC_server/include/SQLStatement.h
 	<string>
 	<iostream>
 	<DBHandler.h>
@@ -98,7 +101,7 @@
 	<SQLInterface.h>
 	<iostream>
 
-1484593201 source:/home/alex/Desktop/InfoFerC/InfoFerC_server/src/SQLpostDelay.cpp
+1484676778 source:/home/alex/Desktop/InfoFerC/InfoFerC_server/src/SQLpostDelay.cpp
 	"SQLpostDelay.h"
 
 1484483829 /home/alex/Desktop/InfoFerC/InfoFerC_server/include/SQLpostDelay.h
@@ -106,7 +109,7 @@
 	<SQLInterface.h>
 	<iostream>
 
-1484483891 source:/home/alex/Desktop/InfoFerC/InfoFerC_server/src/SQLpostOntim.cpp
+1484676778 source:/home/alex/Desktop/InfoFerC/InfoFerC_server/src/SQLpostOntim.cpp
 	"SQLpostOntim.h"
 
 1484483870 /home/alex/Desktop/InfoFerC/InfoFerC_server/include/SQLpostOntim.h
@@ -127,7 +130,7 @@
 
 1484513487 source:/home/alex/Desktop/InfoFerC/InfoFerC_server/src/DBHandler.cpp
 
-1484605325 /home/alex/Desktop/InfoFerC/InfoFerC_server/include/DBEngine.h
+1484677182 /home/alex/Desktop/InfoFerC/InfoFerC_server/include/DBEngine.h
 	<iostream>
 	<string>
 	<sqlite3.h>
@@ -135,7 +138,7 @@
 	<vector>
 	<ctime>
 
-1484604900 source:/home/alex/Desktop/InfoFerC/InfoFerC_server/src/DBEngine.cpp
+1484677168 source:/home/alex/Desktop/InfoFerC/InfoFerC_server/src/DBEngine.cpp
 	"DBEngine.h"
 
 1484594318 source:/home/alex/Desktop/InfoFerC/InfoFerC_server/include/fileHandler.cpp
@@ -149,4 +152,24 @@
 	<string>
 	<fstream>
 	<vector>
+
+1484682086 source:/home/alex/Desktop/InfoFerC/InfoFerC_server/src/loginChecker.cpp
+	"loginChecker.h"
+
+1484682088 /home/alex/Desktop/InfoFerC/InfoFerC_server/include/loginChecker.h
+	<string>
+
+1484691578 source:/home/alex/Desktop/InfoFerC/InfoFerC_server/src/clientAgent.cpp
+	<clientAgent.h>
+	<pthread.h>
+
+1484690425 /home/alex/Desktop/InfoFerC/InfoFerC_server/include/clientAgent.h
+	<mutex>
+	<sys/types.h>
+	<sys/socket.h>
+	<netinet/in.h>
+	<iostream>
+	<unistd.h>
+	<string.h>
+	<stdlib.h>
 

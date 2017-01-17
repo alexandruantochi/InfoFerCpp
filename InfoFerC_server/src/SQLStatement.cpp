@@ -2,10 +2,11 @@
 #include <string>
 #include "DBEngine.h"
 
-SQLStatement::SQLStatement(std::string delay)
+SQLStatement::SQLStatement(time_t delay, int trainID, bool hasPriority)
 {
     this->delay=delay;
-    prepare_class();
+    this->trainID = trainID;
+    this->delay = delay;
 } ;
 
 
@@ -14,7 +15,7 @@ SQLStatement::SQLStatement(std::string dep_station,
                            std::string arr_station,
                            std::string dep_time,
                            std::string arr_time,
-                           std::string delay, int client_id, bool hasPriority)
+                           int client_id, bool hasPriority)
 {
     this->dep_station=dep_station;
     this->arr_station=arr_station;
@@ -40,10 +41,10 @@ void SQLStatement::prepare_class()
     {
         dep_time="0";
     }
-    if (delay.empty())
+    if (arr_time.empty())
     {
         //second day
-        delay="86460";
+        arr_time="86460";
     }
 }
 
@@ -69,12 +70,14 @@ void SQLStatement::getTrains()
 
 void SQLStatement::postDelay()
 {
-    query = "Select * from trenuri where id_tren=5684";
+    delay = delay * 60;
+    query = "update trenuri set intarzieri="+std::to_string(delay)+" where id_tren="+std::to_string(trainID)+";";
+    executeUpdate(query);
 
 }
 
 void SQLStatement::postOntim()
 {
-    query = "select * from trenuri";
-
+    query = "update trenuri set intarzieri=0 where id_tren = " + std::to_string(trainID) +";";
+    executeUpdate(query);
 }

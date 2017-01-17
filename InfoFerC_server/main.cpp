@@ -4,9 +4,12 @@
 #include <SQLgetTrains.h>
 #include <SQLInterface.h>
 #include <SQLpostDelay.h>
+#include <SQLpostOntim.h>
 #include <SQLQueue.h>
 #include <DBEngine.h>
 #include <fileHandler.h>
+#include <loginChecker.h>
+#include <clientAgent.h>
 #include <list>
 #include <iostream>
 #include <pthread.h>
@@ -36,6 +39,23 @@ int main()
     DBEngineInit(dbLocation.c_str());
 
 
+    startServer();
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -45,22 +65,32 @@ int main()
 
 void testServer()
 {
-    SQLStatement stmt1("Iasi","Pascani","10","85000","0",0,false);
-    SQLStatement stmt2("Pascani","Suceava","15","85000","1",1,false);
-    SQLStatement stmt3("podul iloaiei","piatra neamt","09","85000","1",3, true);
+    SQLStatement stmt1("Iasi","Pascani","10","85000",0);
+    SQLStatement stmt2("Pascani","Suceava","15","85000",1);
+    SQLStatement stmt3(120,1337);
+    SQLStatement stmt4(0,1337);
 
     SQLQueue sqlQueue;
 
 
 
-    sqlQueue.addQuery(new SQLgetTrains(&stmt1));
-    sqlQueue.addQuery(new SQLgetTrains(&stmt2));
-    //sqlQueue.addQuery(new SQLpostDelay(&stmt3));
+      sqlQueue.addQuery(new SQLgetTrains(&stmt1));
+      sqlQueue.addQuery(new SQLgetTrains(&stmt2));
+        sqlQueue.addQuery(new SQLpostOntim(&stmt3));
+      //sqlQueue.addQuery(new SQLpostDelay(&stmt3));
 
-    sqlQueue.startQuery();
+
+    login check;
+    check.username="admin";
+    check.password="root";
+
+    if (checkLogin(check))
+        sqlQueue.startQuery();
 
     clear(4);
 
     std::cout<<resultFiles[1]<<std::endl;
 
 }
+
+

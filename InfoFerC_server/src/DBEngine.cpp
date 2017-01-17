@@ -69,11 +69,29 @@ void executeQuery(std::string query, int client_id)
         std::cout<<"File generated for client "<<client_id << std::endl;
     }
 
-    clear(2);
+    clear(1);
 }
 
 
+void executeUpdate(std::string query)
+{
+    std::cout<< query << std::endl << std::endl;
 
+    sqlite3_exec(db, query.c_str(), 0, 0, &errors);
+
+    if (dbmessages)
+    {
+        std::cout<< "Failed to retrieve info from db." << std::endl  << std::endl;
+        std::cout<< "Error:"<< errors << std::endl << std::endl;
+        sqlite3_close(db);
+    }
+    else
+    {
+        std::cout<<"Update complete.";
+        clear(2);
+    }
+
+}
 
 int queryResolver(void *client_id, int argc, char **argv, char **azColName)
 {

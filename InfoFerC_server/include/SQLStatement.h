@@ -7,14 +7,18 @@
 class SQLStatement
 {
 public:
+
     int client_id;
+    int trainID;
     bool hasPriority;
-    SQLStatement(std::string delay);
+
+    SQLStatement(time_t delay, int trainID,bool hasPriority=true);
+
     SQLStatement(std::string dep_station,
                  std::string arr_station,
                  std::string dep_time,
                  std::string arr_time,
-                 std::string delay, int client_id, bool hasPriority);
+                 int client_id, bool hasPriority=false);
 
     void getTrains();
     void postDelay();
@@ -28,7 +32,7 @@ private:
     std::string arr_station;
     std::string dep_time;
     std::string arr_time;
-    std::string delay;
+    int delay;
     void prepare_class();
     std::string query;
 
