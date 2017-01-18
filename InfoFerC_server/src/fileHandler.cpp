@@ -24,7 +24,7 @@ int fileGenerator(int client_id, std::map<std::string, std::string> resultMap)
 
     if ((clientFilePtr=fopen(location.c_str(),"r"))==NULL)
     {
-        std::cout<<"Error pointing to  client file!"<<std::endl;
+        std::cout<<"Error pointing to client file!"<<std::endl;
         return 0;
     }
     else

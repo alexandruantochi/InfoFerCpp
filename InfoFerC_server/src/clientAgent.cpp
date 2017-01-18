@@ -55,7 +55,6 @@ void startServer()
 void threadCreate(int i)
 {
     void *treat(void *);
-
     pthread_create(&threadList[i].threadID,NULL,&treatClient,(void*)i);
     return;
 }
@@ -70,8 +69,6 @@ void *treatClient(void* i)
 
     std::cout<<"Thread started "<< *((int*)(&i)) << std::endl;
 
-    if (*((int*)(&i)) == 5)
-    testServer();
 
     for( ; ; )
     {
@@ -82,9 +79,23 @@ void *treatClient(void* i)
         {
             std::cout<<"Client accept error, id="<< *((int*)(&i))<<std::endl;
         }
+        else
+        {
+            std::cout << "Client connected, id="<< *((int*)(&i)) << std::endl;
+
+        }
+
+
 
         mutexLock.unlock();
         threadList[*((int*)(&i))].threadCount++;
+
+
+        SQLQueue sqlQueue;
+        SQLStatement stmt1("Pascani","Suceava","15","85000",*((int*)(&i)));
+
+        sqlQueue.addQuery(new SQLgetTrains(&stmt1));
+        sqlQueue.startQuery();
 
         close (client);
     }

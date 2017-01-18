@@ -9,8 +9,9 @@
 #include <unistd.h>
 #include <string.h>
 #include <stdlib.h>
-
-
+#include <SQLStatement.h>
+#include <SQLQueue.h>
+#include <SQLgetTrains.h>
 
 #define PORT 8005
 

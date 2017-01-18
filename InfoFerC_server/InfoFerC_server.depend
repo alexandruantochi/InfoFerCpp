@@ -57,7 +57,7 @@
 	<ctype.h>
 	<math.h>
 
-1484691474 source:/home/alex/Desktop/InfoFerC/InfoFerC_server/main.cpp
+1484762157 source:/home/alex/Desktop/InfoFerC/InfoFerC_server/main.cpp
 	<string>
 	<stdio.h>
 	<SQLStatement.h>
@@ -117,7 +117,7 @@
 	<SQLInterface.h>
 	<iostream>
 
-1484593155 source:/home/alex/Desktop/InfoFerC/InfoFerC_server/src/SQLQueue.cpp
+1484763585 source:/home/alex/Desktop/InfoFerC/InfoFerC_server/src/SQLQueue.cpp
 	"SQLQueue.h"
 	<list>
 
@@ -143,7 +143,7 @@
 
 1484594318 source:/home/alex/Desktop/InfoFerC/InfoFerC_server/include/fileHandler.cpp
 
-1484595851 source:/home/alex/Desktop/InfoFerC/InfoFerC_server/src/fileHandler.cpp
+1484763656 source:/home/alex/Desktop/InfoFerC/InfoFerC_server/src/fileHandler.cpp
 	"fileHandler.h"
 
 1484595818 /home/alex/Desktop/InfoFerC/InfoFerC_server/include/fileHandler.h
@@ -159,11 +159,11 @@
 1484682088 /home/alex/Desktop/InfoFerC/InfoFerC_server/include/loginChecker.h
 	<string>
 
-1484691578 source:/home/alex/Desktop/InfoFerC/InfoFerC_server/src/clientAgent.cpp
+1484763983 source:/home/alex/Desktop/InfoFerC/InfoFerC_server/src/clientAgent.cpp
 	<clientAgent.h>
 	<pthread.h>
 
-1484690425 /home/alex/Desktop/InfoFerC/InfoFerC_server/include/clientAgent.h
+1484763996 /home/alex/Desktop/InfoFerC/InfoFerC_server/include/clientAgent.h
 	<mutex>
 	<sys/types.h>
 	<sys/socket.h>
@@ -172,4 +172,7 @@
 	<unistd.h>
 	<string.h>
 	<stdlib.h>
+	<SQLStatement.h>
+	<SQLQueue.h>
+	<SQLgetTrains.h>
 

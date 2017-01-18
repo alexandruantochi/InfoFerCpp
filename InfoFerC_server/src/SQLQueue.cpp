@@ -30,9 +30,10 @@ void SQLQueue::addQuery(SQLInterface* sqlCommand)
 
 void SQLQueue::startQuery()
 {
+    if (!stmtList.empty())
     for (std::list<SQLInterface*>::iterator it= stmtList.begin(); it!=stmtList.end(); ++it)
     {
         (*it)->execute();
     }
-
+    stmtList.clear();
 }

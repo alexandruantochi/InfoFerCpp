@@ -1,0 +1,14 @@
+# depslib dependency file v1.0
+1484761435 source:/home/alex/Desktop/InfoFerC/InfoFerC_client/clientGUI.cpp
+
+1484761584 source:/home/alex/Desktop/InfoFerC/InfoFerC_client/main.cpp
+	<sys/types.h>
+	<sys/socket.h>
+	<arpa/inet.h>
+	<errno.h>
+	<unistd.h>
+	<stdio.h>
+	<stdlib.h>
+	<netdb.h>
+	<string.h>
+

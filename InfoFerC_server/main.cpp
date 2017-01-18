@@ -42,24 +42,6 @@ int main()
     startServer();
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
     return 0;
 }
 
@@ -74,10 +56,10 @@ void testServer()
 
 
 
-      sqlQueue.addQuery(new SQLgetTrains(&stmt1));
-      sqlQueue.addQuery(new SQLgetTrains(&stmt2));
-        sqlQueue.addQuery(new SQLpostOntim(&stmt3));
-      //sqlQueue.addQuery(new SQLpostDelay(&stmt3));
+    sqlQueue.addQuery(new SQLgetTrains(&stmt1));
+    sqlQueue.addQuery(new SQLgetTrains(&stmt2));
+    sqlQueue.addQuery(new SQLpostOntim(&stmt3));
+    //sqlQueue.addQuery(new SQLpostDelay(&stmt3));
 
 
     login check;

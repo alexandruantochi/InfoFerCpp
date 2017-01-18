@@ -37,6 +37,7 @@
 			<Add directory="include" />
 		</Compiler>
 		<Linker>
+			<Add option="-lpthread" />
 			<Add library="../../../../../usr/local/lib/libsqlite3.so" />
 		</Linker>
 		<Unit filename="include/DBEngine.h" />
@@ -47,7 +48,9 @@
 		<Unit filename="include/SQLgetTrains.h" />
 		<Unit filename="include/SQLpostDelay.h" />
 		<Unit filename="include/SQLpostOntim.h" />
+		<Unit filename="include/clientAgent.h" />
 		<Unit filename="include/fileHandler.h" />
+		<Unit filename="include/loginChecker.h" />
 		<Unit filename="main.cpp" />
 		<Unit filename="src/DBEngine.cpp" />
 		<Unit filename="src/DBHandler.cpp" />
@@ -57,7 +60,9 @@
 		<Unit filename="src/SQLgetTrains.cpp" />
 		<Unit filename="src/SQLpostDelay.cpp" />
 		<Unit filename="src/SQLpostOntim.cpp" />
+		<Unit filename="src/clientAgent.cpp" />
 		<Unit filename="src/fileHandler.cpp" />
+		<Unit filename="src/loginChecker.cpp" />
 		<Extensions>
 			<code_completion />
 			<debugger />
