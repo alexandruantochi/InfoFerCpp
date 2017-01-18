@@ -54,17 +54,44 @@ int main (int argc, char *argv[])
       return errno;
     }
 
-  /* citirea mesajului */
-  printf ("[client]Introduceti un numar: ");
-  fflush (stdout);
-  read (0, buf, sizeof(buf));
-  nr=atoi(buf);
+
+  struct login
+  {
+    char username[255];
+    char password[255];
+  } loginDetails;
   //scanf("%d",&nr);
 
-  printf("[client] Am citit %d\n",nr);
+
+  strncpy(loginDetails.username,"admin", sizeof("admin"));
+  strncpy(loginDetails.password,"root", sizeof("root"));
+
+
+  struct response
+    {
+        char dep_station[255];
+        char arr_station[255];
+        int dep_time;
+        int arr_time;
+    } query ;
+
+    strncpy(query.dep_station,"Iasi",sizeof("Iasi"));
+    strncpy(query.arr_station,"Suceava",sizeof("Suceava"));
+    query.dep_time=0;
+    query.arr_time=85000;
+
+  printf("Trimite login\n");
 
   /* trimiterea mesajului la server */
-  if (write (sd,&nr,sizeof(int)) <= 0)
+  if (write (sd,&loginDetails,sizeof(loginDetails)) <= 0)
+    {
+      perror ("[client]Eroare la write() spre server.\n");
+      return errno;
+    }
+
+    printf("Trimite query\n");
+
+     if (write (sd,&query,sizeof(query)) <= 0)
     {
       perror ("[client]Eroare la write() spre server.\n");
       return errno;
@@ -72,11 +99,7 @@ int main (int argc, char *argv[])
 
   /* citirea raspunsului dat de server
      (apel blocant pina cind serverul raspunde) */
-  if (read (sd, &nr,sizeof(int)) < 0)
-    {
-      perror ("[client]Eroare la read() de la server.\n");
-      return errno;
-    }
+
   /* afisam mesajul primit */
   printf ("[client]Mesajul primit este: %d\n", nr);
 
