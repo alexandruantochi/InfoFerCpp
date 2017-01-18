@@ -47,31 +47,31 @@ int main()
 
 void testServer()
 {
-    SQLStatement stmt1("Iasi","Pascani","10","85000",0);
-    SQLStatement stmt2("Pascani","Suceava","15","85000",1);
-    SQLStatement stmt3(120,1337);
-    SQLStatement stmt4(0,1337);
-
-    SQLQueue sqlQueue;
-
-
-
-    sqlQueue.addQuery(new SQLgetTrains(&stmt1));
-    sqlQueue.addQuery(new SQLgetTrains(&stmt2));
-    sqlQueue.addQuery(new SQLpostOntim(&stmt3));
-    //sqlQueue.addQuery(new SQLpostDelay(&stmt3));
-
-
-    login check;
-    check.username="admin";
-    check.password="root";
-
-    if (checkLogin(check))
-        sqlQueue.startQuery();
-
-    clear(4);
-
-    std::cout<<resultFiles[1]<<std::endl;
+//    SQLStatement stmt1("Iasi","Pascani","10","85000",0);
+//    SQLStatement stmt2("Pascani","Suceava","15","85000",1);
+//    SQLStatement stmt3(120,1337);
+//    SQLStatement stmt4(0,1337);
+//
+//    SQLQueue sqlQueue;
+//
+//
+//
+//    sqlQueue.addQuery(new SQLgetTrains(&stmt1));
+//    sqlQueue.addQuery(new SQLgetTrains(&stmt2));
+//    sqlQueue.addQuery(new SQLpostOntim(&stmt3));
+//    //sqlQueue.addQuery(new SQLpostDelay(&stmt3));
+//
+//
+//    login check;
+//    check.username="admin";
+//    check.password="root";
+//
+//    if (checkLogin(check))
+//        sqlQueue.startQuery();
+//
+//    clear(4);
+//
+//    std::cout<<resultFiles[1]<<std::endl;
 
 }
 

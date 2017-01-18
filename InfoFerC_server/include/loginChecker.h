@@ -1,11 +1,11 @@
 #ifndef LOGINCHECKER_H_INCLUDED
 #define LOGINCHECKER_H_INCLUDED
-#include <string>
+#include <string.h>
 
 struct login
 {
-std::string username;
-std::string password;
+char username[255];
+char password[255];
 };
 
 bool checkLogin(login loginDetails);
