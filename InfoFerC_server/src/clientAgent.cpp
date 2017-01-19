@@ -3,6 +3,8 @@
 #include <fileHandler.h>
 
 
+int SERVER_OK=0;
+
 extern std::vector<FILE*> resultFiles;
 
 threadInfo* threadList = (threadInfo*)calloc(15,sizeof(threadInfo));
@@ -111,27 +113,30 @@ void processClientReq(int client_id, socklen_t connection)
 
     if (!checkLogin(loginDetails))
     {
-        std::cout<<"Client " << client_id << " disconnected for bad credentials"<<std::endl;
+        std::cout<<"Client " << client_id << " disconnected for bad credentials."<<std::endl;
         return;
     }
     else
     {
-        std::cout<<"Client logged in"<<std::endl;
+        std::cout<<"Client logged in."<<std::endl;
     }
 
-    command=1;
-//    while(command!=4)
-//    {
-//
-//        if (read (connection, &command,sizeof(int)) <= 0)
-//        {
-//            std::cout<<"Command read error."<<std::endl;
-//        }
+    if (write (connection,&SERVER_OK,sizeof(int)) <= 0)
+    {
+        std::cout<<"Error sending OK to client."<<std::endl;
+    }
+    command=0;
+
+    while(command!=4)
+    {
+
+        if (read (connection, &command,sizeof(int)) <= 0)
+        {
+            std::cout<<"Command read error."<<std::endl;
+            return;
+        }
         switch(command)
         {
-        case 0:
-            close(connection);
-            return;
         case 1:
             getQuery(client_id, connection);
             break;
@@ -142,6 +147,7 @@ void processClientReq(int client_id, socklen_t connection)
             getOntim(client_id, connection);
             break;
         }
+    }
 
 
 
@@ -150,13 +156,16 @@ void processClientReq(int client_id, socklen_t connection)
 
 void getQuery(int client_id, socklen_t connection)
 {
+
+
     struct response
     {
         char dep_station[255];
         char arr_station[255];
-        int dep_time;
-        int arr_time;
+        time_t dep_time;
+        time_t arr_time;
     } query ;
+
 
     if ((read (connection, &query,sizeof(query))) <= 0)
     {
@@ -178,18 +187,32 @@ void getQuery(int client_id, socklen_t connection)
     SQLQueue::startQuery();
     q_mutexLock.unlock();
 
-
-
     sendResultFile(client_id, connection);
 
-    std::cout<<"sendfiletoclient"<<std::endl;
-
-
-
 }
+
+
 void getUpdate(int client_id,socklen_t connection) {}
 void getOntim(int client_id, socklen_t connection) {}
-void sendResultFile(int client_id, socklen_t connection) {}
+
+
+void sendResultFile(int client_id, socklen_t connection) {
+
+    struct stat stat_buf;
+    off_t offset = 0;
+
+    fstat(fileno(resultFiles[client_id]), &stat_buf);
+
+    write(connection,&stat_buf,sizeof(stat_buf));
+
+    if ((sendfile (connection, fileno(resultFiles[client_id]), &offset, stat_buf.st_size)) < 0)
+    {
+        std::cout<<"Error sending file to client "<<client_id<<std::endl;
+    }
+
+    std::cout<<"File sent."<<std::endl;
+
+}
 
 //void raspunde(int cl,int idThread)
 //{

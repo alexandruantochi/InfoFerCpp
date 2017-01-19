@@ -7,102 +7,90 @@
 #include <stdlib.h>
 #include <netdb.h>
 #include <string.h>
+#include <iostream>
+#include <iomanip>
 
-/* codul de eroare returnat de anumite apeluri */
-extern int errno;
 
-/* portul de conectare la server*/
-int port;
+#define PORT 8007
+#define SERV_IP "127.0.0.1"
+#define SERVER_OK 0
+#define SERVER_NOK 9
+
+bool loginToServer(int socketFd);
+int getResponse(int sd);
+void executeQuery(int sd);
+void postDelay(int sd);
+void postOntim(int sd);
+void logout(int sd);
 
 int main (int argc, char *argv[])
 {
-  int sd;			// descriptorul de socket
-  struct sockaddr_in server;	// structura folosita pentru conectare
-  		// mesajul trimis
-  int nr=0;
-  char buf[10];
+  int sd;
+  struct sockaddr_in server;
 
-  /* exista toate argumentele in linia de comanda? */
-  if (argc != 3)
-    {
-      printf ("Sintaxa: %s <adresa_server> <port>\n", argv[0]);
-      return -1;
-    }
 
-  /* stabilim portul */
-  port = atoi (argv[2]);
-
-  /* cream socketul */
   if ((sd = socket (AF_INET, SOCK_STREAM, 0)) == -1)
     {
-      perror ("Eroare la socket().\n");
-      return errno;
+      std::cout<<"Socket error"<<std::endl;
     }
 
-  /* umplem structura folosita pentru realizarea conexiunii cu serverul */
-  /* familia socket-ului */
   server.sin_family = AF_INET;
-  /* adresa IP a serverului */
-  server.sin_addr.s_addr = inet_addr(argv[1]);
-  /* portul de conectare */
-  server.sin_port = htons (port);
+  server.sin_addr.s_addr = inet_addr(SERV_IP);
+  server.sin_port = htons (PORT);
 
-  /* ne conectam la server */
-  if (connect (sd, (struct sockaddr *) &server,sizeof (struct sockaddr)) == -1)
+    if (connect (sd, (struct sockaddr *) &server,sizeof (struct sockaddr)) == -1)
     {
-      perror ("[client]Eroare la connect().\n");
-      return errno;
+      std::cout<<"Connection error."<<std::endl;
+      return 0;
     }
 
 
-  struct login
-  {
-    char username[255];
-    char password[255];
-  } loginDetails;
-  //scanf("%d",&nr);
+    if (!loginToServer(sd)) {return 0;}
+    bool loggedIn=true;
+    int option;
 
+    while (loggedIn)
+{
+    std::cout<<"Choose your option:"<<std::endl;
+    std::cout<<"1 - Get Train Information"<<std::endl;
+    std::cout<<"2 - Post Train Delay"<<std::endl;
+    std::cout<<"3 - Post Train On Time"<<std::endl;
+    std::cout<<"4 - Logout"<<std::endl;
+    std::cin >> option;
 
-  strncpy(loginDetails.username,"admin", sizeof("admin"));
-  strncpy(loginDetails.password,"root", sizeof("root"));
-
-
-  struct response
+    switch(option)
     {
-        char dep_station[255];
-        char arr_station[255];
-        int dep_time;
-        int arr_time;
-    } query ;
-
-    strncpy(query.dep_station,"Iasi",sizeof("Iasi"));
-    strncpy(query.arr_station,"Suceava",sizeof("Suceava"));
-    query.dep_time=0;
-    query.arr_time=85000;
-
-  printf("Trimite login\n");
-
-  /* trimiterea mesajului la server */
-  if (write (sd,&loginDetails,sizeof(loginDetails)) <= 0)
-    {
-      perror ("[client]Eroare la write() spre server.\n");
-      return errno;
+    case 1: executeQuery(sd); break;
+    case 2: postDelay(sd); break;
+    case 3: postOntim(sd); break;
+    case 4: logout(sd); break;
+    default: std::cout<<"Invalid option."<<std::endl;
     }
+}
 
-    printf("Trimite query\n");
+//    strncpy(query.dep_station,"Iasi",sizeof("Iasi"));
+//    strncpy(query.arr_station,"Suceava",sizeof("Suceava"));
+//    query.dep_time=0;
+//    query.arr_time=85000;
 
-     if (write (sd,&query,sizeof(query)) <= 0)
-    {
-      perror ("[client]Eroare la write() spre server.\n");
-      return errno;
-    }
+
+
+//
+//     if (write (sd,&query,sizeof(query)) <= 0)
+//    {
+//      perror ("[client]Eroare la write() spre server.\n");
+//      return errno;
+//    }
 
   /* citirea raspunsului dat de server
      (apel blocant pina cind serverul raspunde) */
 
   /* afisam mesajul primit */
-  printf ("[client]Mesajul primit este: %d\n", nr);
+
 
   /* inchidem conexiunea, am terminat */
-  close (sd);
+  //close (sd);
 }
+
+
+

@@ -1,7 +1,8 @@
 # depslib dependency file v1.0
-1484767560 source:/home/alex/Desktop/InfoFerC/InfoFerC_client/clientGUI.cpp
+1484866814 source:/home/alex/Desktop/InfoFerC/InfoFerC_client/clientGUI.cpp
+	"clientGUI.h"
 
-1484761584 source:/home/alex/Desktop/InfoFerC/InfoFerC_client/main.cpp
+1484860803 source:/home/alex/Desktop/InfoFerC/InfoFerC_client/main.cpp
 	<sys/types.h>
 	<sys/socket.h>
 	<arpa/inet.h>
@@ -11,4 +12,27 @@
 	<stdlib.h>
 	<netdb.h>
 	<string.h>
+	<iostream>
+	<iomanip>
+
+1484864570 /home/alex/Desktop/InfoFerC/InfoFerC_client/clientGUI.h
+	<sys/types.h>
+	<sys/socket.h>
+	<sys/sendfile.h>
+	<sys/stat.h>
+	<unistd.h>
+	<stdio.h>
+	<stdlib.h>
+	<iostream>
+	<iomanip>
+
+1484860607 /home/alex/Desktop/InfoFerC/InfoFerC_client//clientGUI.h
+	<sys/types.h>
+	<sys/socket.h>
+	<unistd.h>
+	<stdio.h>
+	<stdlib.h>
+	<netdb.h>
+	<iostream>
+	<iomanip>
 
