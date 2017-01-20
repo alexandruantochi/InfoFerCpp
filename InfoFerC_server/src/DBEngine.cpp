@@ -116,7 +116,7 @@ int queryResolver(void *client_id, int argc, char **argv, char **azColName)
         durata  = durata + atoi(argv[7]);
         counter++;
         distanta = distanta + atoi(argv[8]);
-        resultMap[argv[0]]=result + "%" + std::to_string(distanta) + "%" + makeTime(durata) +  "%" + makeTime(durataT+durata+delay/counter) +"\n";
+        resultMap[argv[0]]=result + "\n%" + std::to_string(distanta) + "%" + makeTime(durata) +  "%" + makeTime(durataT+durata+delay/counter) ;
     }
     return 0;
 }

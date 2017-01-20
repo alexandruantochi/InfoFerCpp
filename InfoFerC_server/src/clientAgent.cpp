@@ -135,6 +135,7 @@ void processClientReq(int client_id, socklen_t connection)
             std::cout<<"Command read error."<<std::endl;
             return;
         }
+        std::cout<<"Read command "<<command<< " from client no. "<<client_id<<"\n";
         switch(command)
         {
         case 1:
@@ -146,6 +147,10 @@ void processClientReq(int client_id, socklen_t connection)
         case 3:
             getOntim(client_id, connection);
             break;
+        case 4:
+            close(client_id); break;
+        default:
+            close(client_id); break;
         }
     }
 
@@ -192,8 +197,68 @@ void getQuery(int client_id, socklen_t connection)
 }
 
 
-void getUpdate(int client_id,socklen_t connection) {}
-void getOntim(int client_id, socklen_t connection) {}
+void getUpdate(int client_id,socklen_t connection)
+{
+
+struct delay
+    {
+        int trainID;
+        time_t time;
+    } delayInfo;
+
+
+if ((read (connection, &delayInfo,sizeof(delayInfo))) <= 0)
+    {
+        std::cout<<"Error while reading command postDelay."<<std::endl;
+    }
+
+    SQLStatement stmt(delayInfo.time,delayInfo.trainID, true);
+    q_mutexLock.lock();
+    SQLQueue::addQuery(new SQLpostDelay(&stmt));
+    q_mutexLock.unlock();
+    sleep(1);
+    q_mutexLock.lock();
+    SQLQueue::startQuery();
+    q_mutexLock.unlock();
+
+    if (write (connection,&SERVER_OK,sizeof(int)) <= 0)
+    {
+        std::cout<<"Error sending OK to client."<<std::endl;
+    }
+
+
+}
+void getOntim(int client_id, socklen_t connection)
+{
+
+struct delay
+    {
+        int trainID;
+        time_t time;
+    } delayInfo;
+
+
+if ((read (connection, &delayInfo,sizeof(delayInfo))) <= 0)
+    {
+        std::cout<<"Error while reading command postOntim."<<std::endl;
+    }
+
+    SQLStatement stmt(delayInfo.time,delayInfo.trainID, true);
+    q_mutexLock.lock();
+    SQLQueue::addQuery(new SQLpostOntim(&stmt));
+    q_mutexLock.unlock();
+    sleep(1);
+    q_mutexLock.lock();
+    SQLQueue::startQuery();
+    q_mutexLock.unlock();
+
+    if (write (connection,&SERVER_OK,sizeof(int)) <= 0)
+    {
+        std::cout<<"Error sending OK to client."<<std::endl;
+    }
+
+
+}
 
 
 void sendResultFile(int client_id, socklen_t connection) {

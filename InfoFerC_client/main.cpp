@@ -19,8 +19,7 @@
 bool loginToServer(int socketFd);
 int getResponse(int sd);
 void executeQuery(int sd);
-void postDelay(int sd);
-void postOntim(int sd);
+void postDelay(int sd,bool ontim);
 void logout(int sd);
 
 int main (int argc, char *argv[])
@@ -61,8 +60,8 @@ int main (int argc, char *argv[])
     switch(option)
     {
     case 1: executeQuery(sd); break;
-    case 2: postDelay(sd); break;
-    case 3: postOntim(sd); break;
+    case 2: postDelay(sd, false); break;
+    case 3: postDelay(sd, true); break;
     case 4: logout(sd); break;
     default: std::cout<<"Invalid option."<<std::endl;
     }
