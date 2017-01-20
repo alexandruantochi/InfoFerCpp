@@ -148,9 +148,11 @@ void processClientReq(int client_id, socklen_t connection)
             getOntim(client_id, connection);
             break;
         case 4:
-            close(client_id); break;
+            logoutClient(client_id,connection);
+            break;
         default:
-            close(client_id); break;
+            close(client_id);
+            break;
         }
     }
 
@@ -200,14 +202,14 @@ void getQuery(int client_id, socklen_t connection)
 void getUpdate(int client_id,socklen_t connection)
 {
 
-struct delay
+    struct delay
     {
         int trainID;
         time_t time;
     } delayInfo;
 
 
-if ((read (connection, &delayInfo,sizeof(delayInfo))) <= 0)
+    if ((read (connection, &delayInfo,sizeof(delayInfo))) <= 0)
     {
         std::cout<<"Error while reading command postDelay."<<std::endl;
     }
@@ -231,14 +233,14 @@ if ((read (connection, &delayInfo,sizeof(delayInfo))) <= 0)
 void getOntim(int client_id, socklen_t connection)
 {
 
-struct delay
+    struct delay
     {
         int trainID;
         time_t time;
     } delayInfo;
 
 
-if ((read (connection, &delayInfo,sizeof(delayInfo))) <= 0)
+    if ((read (connection, &delayInfo,sizeof(delayInfo))) <= 0)
     {
         std::cout<<"Error while reading command postOntim."<<std::endl;
     }
@@ -260,8 +262,19 @@ if ((read (connection, &delayInfo,sizeof(delayInfo))) <= 0)
 
 }
 
+void logoutClient(int client_id, socklen_t connection)
+{
+    if (write (connection,&SERVER_OK,sizeof(int)) <= 0)
+    {
+        std::cout<<"Error sending OK to client."<<std::endl;
+    }
 
-void sendResultFile(int client_id, socklen_t connection) {
+    close(connection);
+}
+
+
+void sendResultFile(int client_id, socklen_t connection)
+{
 
     struct stat stat_buf;
     off_t offset = 0;

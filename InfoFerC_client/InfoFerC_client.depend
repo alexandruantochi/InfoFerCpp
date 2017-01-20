@@ -1,5 +1,5 @@
 # depslib dependency file v1.0
-1484875160 source:/home/alex/Desktop/InfoFerC/InfoFerC_client/clientGUI.cpp
+1484875861 source:/home/alex/Desktop/InfoFerC/InfoFerC_client/clientGUI.cpp
 	"clientGUI.h"
 
 1484874273 source:/home/alex/Desktop/InfoFerC/InfoFerC_client/main.cpp
@@ -15,7 +15,7 @@
 	<iostream>
 	<iomanip>
 
-1484874260 /home/alex/Desktop/InfoFerC/InfoFerC_client/clientGUI.h
+1484875470 /home/alex/Desktop/InfoFerC/InfoFerC_client/clientGUI.h
 	<sys/types.h>
 	<sys/socket.h>
 	<sys/sendfile.h>

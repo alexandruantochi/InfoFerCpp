@@ -21,7 +21,9 @@ int getResponse(int sd);
 void executeQuery(int sd);
 void postDelay(int sd, bool ontim);
 void logout(int sd);
-
+void getResultFile(int sd);
+void displayResults();
+void showResults(std::string line, int flipFlop);
 
 
 

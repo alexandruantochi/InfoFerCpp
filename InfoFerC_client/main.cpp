@@ -62,7 +62,7 @@ int main (int argc, char *argv[])
     case 1: executeQuery(sd); break;
     case 2: postDelay(sd, false); break;
     case 3: postDelay(sd, true); break;
-    case 4: logout(sd); break;
+    case 4: logout(sd); loggedIn=false; break;
     default: std::cout<<"Invalid option."<<std::endl;
     }
 }

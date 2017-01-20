@@ -1,8 +1,5 @@
 #include "clientGUI.h"
 
-void getResultFile(int sd);
-void displayResults();
-void showResults(std::string line, int flipFlop);
 
 bool loginToServer(int sd)
 {
@@ -135,7 +132,16 @@ void postDelay(int sd, bool ontim)
 
 void logout(int sd)
 {
-    sendCommand(sd,4);
+    sendCommand(4,sd);
+    if (getResponse(sd)==SERVER_OK)
+    {
+        std::cout<<"Server confirms logout.\n";
+    }
+    else
+    {
+        std::cout <<"Error, server did not send confirmation.\n";
+    }
+
 
 }
 

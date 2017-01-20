@@ -45,5 +45,7 @@ void sendResultFile(int client_id, socklen_t connection);
 
 void processClientReq(int client_id, socklen_t connection);
 
+void logoutClient(int client_id, socklen_t connection);
+
 
 #endif // CLIENTAGENT_H_INCLUDED
