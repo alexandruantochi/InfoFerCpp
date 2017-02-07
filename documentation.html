@@ -1,0 +1,118 @@
+<h1>InfoFerC++</h1>
+<h3>A C++ app for providing basic access to an SQLITE3 database</h3>
+<ol>
+<li><a href="#intro">Intro</a></li>
+<li><a href="#architecture">Architecture</a></li>
+<li><a href="#details">Code details</a></li>
+<li><a href="#extras">Extras</a></li>
+</ol>
+<h2 id="#intro">Intro</h2>
+<p>The appplication was writen in Code::Blocks IDE for C++ under Linux and is unde a GNU GPU license. It uses a concurent server model that treats each client on a different thread. The client has the option to retrieve data from the SQLITE3 database with various filters: departure_station, arrival_station, departure_time interval. The client also has the option to signal the server a train is running late or a previous delayed train is on time.</p>
+<p>Features</p>
+<ol>
+<li>Query for trains leaving a station</li>
+<li>Find the train you need to take from point A to B, even though A and B are in-between stations</li>
+<li>Send delay info on trains</li>
+<li>Get arrival time aproximation depending on delay and number of stations travelled</li>
+<li>Post train to be on time</li>
+<li>Get number of kilometers depending on selected journey</li>
+<li>Get time travelled depending on the number of stations returned</li>
+<li>Server responds with OK for every request (usefull for updating database confirmation)</li>
+</ol>
+<p>The GUI was written in QT and provides basic functionality for the above mentioned functions.</p>
+<h2 id="architecture">Architecture</h2>
+<h3>SQL queries</h3>
+<p>The server uses the Command Design Pattern with a Priority Queue for the queries. The <strong>SQLStatement</strong> class has all the functions that need to be executed on the database. It's functions are incapsulated in the SQLpost[function_name] and SQLget[function_name] classes, depending on the query type (select,insert). After encapsulation, they are pushed into a list data structure that is composed of <strong>SQLInterface</strong> objects, which are the parent class for SQLpost/SQLget classes. If the SQLStatement member variable <em>hasPriority</em> is <em>true</em>, then the statement will be pushed on the front of the list, else it will be pushed to the back of the list. Thus, when executed, the list queries will be in the order of their importance, having the ones with <em>hasPriority</em> member variable executed first. For queries with the same priority, the list serves on a first-come first-servet basis. Once every <em> t </em>ms the <strong>DBExecuter</strong> will iterate through the list and execute every command.</p>
+<h2 id="details">Code Details</h2>
+<p><strong>Commands</strong></p>
+<ol>
+<li>Find the requeste train, which will display on the console info such as trainID, total kilometers, extimated delay etc.</li>
+<li>Update a train's delay in the table</li>
+<li>Send the server information to remove the train's delay from the table</li>
+<li>Log Out</li>
+</ol>
+<p>&nbsp;</p>
+<h3>DBExecuter</h3>
+<p>The <strong>DBExecuter</strong> does all the database work. It connects to a given SQLITE3 database, takes in the query to be executed and returns the results to the <strong>ResultAgent<strong> which processes the information and stores it in a resultList.</strong></strong></p>
+<p>The resultList is a vector with file pointers, every item pointing to the file with a clien_id attached it to. After the query is done and the file is created on the server, the client will receive a SERVER_OK message.</p>
+<p>The file transfer is done using the <strong>sendfile</strong> primitve and the client saves the file in the <strong>recieved</strong> directory. After it is done parsing it, the file is deleted on the client side. The server saves it for future queries that might repeat and provides the info to the client without querying the database (last part not implemented yet)</p>
+<p>The server also displays the queries and the results in it's own manner to provide the administrators with easy to see information</p>
+<p>void DBEngineInit(const char *location): the function opens the database connection and connects to the database at the given path</p>
+<p>void executeQuery(std::string query, int client_id): this function executes a given query on the database and keeps track of the client which executed it. It saves the query in the file using the fileHandler</p>
+<p>void executeUpdate(std::string query): this function executes and update on the SQLITE3 database</p>
+<p>int queryResolver(void *client_id, int argc, char **argv, char **azColName): standard SQLITE3 library function</p>
+<p>void resetResults(bool map=false): reset results, used everytime a new query is executed</p>
+<p>int fileGenerator(int client_id, std::map&lt;std::string, std::string&gt;): function that handles the file generated needed to be sent to the client. The map is a result with eeach KEY being a different train_id</p>
+<p>std::string makeTime(time_t uTime): convert time from utime to normal HH:MM format</p>
+<h3>Client Handler</h3>
+<p>void startServer(): stars the necessary threads and runs the server</p>
+<p>void threadCreate(int i): create the threads</p>
+<p>void *treatClient(void* i): thread function for treating the client</p>
+<p>void getQuery(int client_id, socklen_t connection): recieve the query from the client in a structure, interpret it and create the SQLStatement class</p>
+<p>void getUpdate(int client_id, socklen_t connection): similar to getQuery</p>
+<p>void getOntim(int client_id, socklen_t connection): similar to getQuery</p>
+<p>void sendResultFile(int client_id, socklen_t connection): send the result file to the client</p>
+<p>void processClientReq(int client_id, socklen_t connection): get the request number from the client, execute apropriate command</p>
+<p>void logoutClient(int client_id, socklen_t connection): close client connection</p>
+<h3>File Handler</h3>
+<p>int fileGenerator(int client_id, std::map&lt;std::string, std::string&gt; resultMap): Generates the needed file for the client with the results from the resultMap</p>
+<h3>Classes</h3>
+<p><strong>Class SQLStatement</strong></p>
+<p>{<br />public:</p>
+<p>int client_id;<br /> int trainID;<br /> bool hasPriority;</p>
+<p>SQLStatement(time_t delay, int trainID,bool hasPriority=true);</p>
+<p>SQLStatement(std::string dep_station,<br /> std::string arr_station,<br /> std::string dep_time,<br /> std::string arr_time,<br /> int client_id, bool hasPriority=false);</p>
+<p>void getTrains();<br /> void postDelay();<br /> void postOntim();</p>
+<p><br />protected:</p>
+<p>private:<br /> std::string dep_station;<br /> std::string arr_station;<br /> std::string dep_time;<br /> std::string arr_time;<br /> int delay;<br /> void prepare_class();<br /> std::string query;</p>
+<p>};</p>
+<p><br /><strong>class SQLQueue</strong><br />{<br /> public:<br /> static std::list&lt;SQLInterface*&gt; stmtList;<br /> static void addQuery(SQLInterface* sqlCommand);<br /> // if the command has priority, it will push it in the front of the list<br /> // else the command will be on a first-come-first-server basis<br /> static void startQuery();<br /> protected:</p>
+<p>private:<br /> SQLQueue();</p>
+<p>};</p>
+<p><strong>class SQLInterface</strong><br />{<br />public:<br /> virtual void execute()=0;<br /> //checks if the query has priority<br /> bool hasPriority;<br /> //the id of the client that executes this query<br /> int id;<br />protected:<br /> SQLInterface();<br />private:</p>
+<p><br />};</p>
+<p><strong>class SQLgetTrains: public SQLInterface</strong><br />{<br /> public:<br /> SQLgetTrains(SQLStatement *statement);<br /> void execute();<br /> protected:</p>
+<p>private:<br /> SQLStatement* statement;<br />};</p>
+<p><br /><strong>class SQLpostDelay: public SQLInterface</strong><br />{<br />public:<br /> SQLpostDelay(SQLStatement* statement);<br /> void execute();<br />protected:</p>
+<p>private:<br /> SQLStatement* statement;</p>
+<p>};</p>
+<p><strong>class SQLpostOntim: public SQLInterface</strong><br />{<br /> public:<br /> SQLpostOntim(SQLStatement* statement);<br /> void execute();<br /> protected:</p>
+<p>private:<br /> SQLStatement* statement;<br />};</p>
+<p>&nbsp;</p>
+<h3><strong>Client GUI</strong></h3>
+<p>The Client GUI provides the client with the 4 options and always asks for a confirmation from the server when performing any action. This is particulary usefull when executing updates on the databse, as there is no information returned.</p>
+<p>In case there are no available trains, nothing will be displayed.</p>
+<p>time_t makeUtime(time_t retTime): convert normal time HHMM to utime;</p>
+<p><br />int getResponse(int sd): gets the current server response;</p>
+<p><br />void executeQuery(int sd): sends the query to the server through the query struct;</p>
+<p><br />void postDelay(int sd, bool ontim): sends a delay update to the server;</p>
+<p><br />void logout(int sd): logs out the client after server confirmation;</p>
+<p><br />void getResultFile(int sd): recieve the result file and save it to disk;</p>
+<p><br />void displayResults(): displays the results from the result file;</p>
+<p><br />void showResults(std::string line, int flipFlop): parses the results from the file;</p>
+<p>&nbsp;</p>
+<p>struct login<br />{<br /> char username[255];<br /> char password[255];<br />} loginDetails;</p>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<h3 id="extras">Extras</h3>
+<p>&nbsp;</p>
+<p>Route map as it is currently in the database file:<img src="http://i.imgur.com/tUjLH6E.png" alt="route_map" width="940" height="225" /></p>
+<p>&nbsp;</p>
+<p>Contact:</p>
+<p><a href="mailto:alexandru.antochi@gmail.com">alexandru.antochi@gmail.com</a>&nbsp;</p>
+<p><a title="My Page" href="http://www.alexandruantochi.ro">www.alexandruantochi.ro</a></p>
+<p><a title="GitHub" href="https://github.com/alexandruantochi">https://github.com/alexandruantochi</a></p>
+<p>&nbsp;</p>
+<p>Bibliography:</p>
+<p><a href="http://profs.info.uaic.ro/~adria/teach/courses/net/files/NetEx/S12/ServerPreThread/servTcpPreTh.c">http://profs.info.uaic.ro/~adria/teach/courses/net/files/NetEx/S12/ServerPreThread/servTcpPreTh.c</a></p>
+<p><a href="http://profs.info.uaic.ro/~adria/teach/courses/net/files/NetEx/S12/ServerPreThread/cliTcpNr.c">http://profs.info.uaic.ro/~adria/teach/courses/net/files/NetEx/S12/ServerPreThread/cliTcpNr.c</a></p>
+<p><a href="https://www.sqlite.org/docs.html">https://www.sqlite.org/docs.html</a></p>
+<p><a href="http://wiki.codeblocks.org/index.php/User_documentation">http://wiki.codeblocks.org/index.php/User_documentation</a></p>
+<p><a href="http://www.cplusplus.com/reference/">http://www.cplusplus.com/reference/</a></p>
+<p><a href="http://zetcode.com/db/sqlite/">http://zetcode.com/db/sqlite/</a></p>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
