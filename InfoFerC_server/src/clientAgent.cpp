@@ -189,7 +189,8 @@ void getQuery(int client_id, socklen_t connection)
     q_mutexLock.lock();
     SQLQueue::addQuery(new SQLgetTrains(&stmt));
     q_mutexLock.unlock();
-    sleep(1);
+    std::cout.flush();
+    sleep(15);
     q_mutexLock.lock();
     SQLQueue::startQuery();
     q_mutexLock.unlock();
@@ -218,7 +219,7 @@ void getUpdate(int client_id,socklen_t connection)
     q_mutexLock.lock();
     SQLQueue::addQuery(new SQLpostDelay(&stmt));
     q_mutexLock.unlock();
-    sleep(1);
+    sleep(30);
     q_mutexLock.lock();
     SQLQueue::startQuery();
     q_mutexLock.unlock();
